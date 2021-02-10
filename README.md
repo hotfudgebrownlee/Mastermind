@@ -35,3 +35,7 @@ root                    (project root folder)
 ## Authors
 ---
 * # TODO: Add your names and emails here
+* Jaren Brownlee- bro15108@byui.edu
+* Christian Martinez- mar19036@byui.edu
+* Dustin Trinh- tri15001@byui.edu
+* Michael Fisher- fis17005@byui.edu
