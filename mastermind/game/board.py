@@ -1,5 +1,7 @@
 class Board:
     """
+    Stereotype: 
+        Information Holder
     """
     def __init__(self):
         """The class constructor.
