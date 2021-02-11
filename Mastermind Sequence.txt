@@ -1,0 +1,39 @@
+title Mastermind
+
+participant Director
+participant Console
+participant Board
+participant Roster
+participant Player
+participant Move
+
+activate Director
+Director->Console:ask for name
+Director->Director: activate Player(name)
+Director->Roster:add player to roster
+deactivate Director
+
+Board->Board:prepare codes
+Board->Console: convert to stars
+
+abox over Director:while keep playing
+activate Director
+
+Roster->Director:get current
+Director->Console:write player name turn
+
+Director->Move:get player move
+
+linear
+Move->Player:
+Player->Console:read guess input
+Console->Director:
+linear off
+
+Director->Board:send input to board
+Board->Board:generate hint
+
+Board->Console:print hint (and guess)
+
+Director->Director: Check guess and hint \nDeclare winner if true\nElse repeat
+
