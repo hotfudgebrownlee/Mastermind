@@ -49,7 +49,18 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        for i in range(2):
+        prompt = "How many players? (2-6): "
+        num_players = self._console.read_number(prompt)
+        while True:
+            if(num_players > 6):
+                print("Please choose less than 7 players.")
+                num_players = self._console.read_number(prompt)
+            elif(num_players < 2):
+                print("Please choose more than 1 player.")
+                num_players = self._console.read_number(prompt)
+            else:
+                break
+        for i in range(num_players):
             p_name = self._console.read(f'Player {(i+1)}, please enter your name: ')
             player = Player(p_name)
             self._roster.add_player(player)
@@ -63,7 +74,17 @@ class Director:
         """
         player = self._roster.get_current()
         self._console.write(f"{player.get_name()}'s turn")
-        guess = self._console.read_number("Please enter your guess: ")
+        prompt = "Please enter your guess (1000-9999): "
+        guess = self._console.read_number(prompt)
+        while True:
+            if(guess < 1000):
+                print("Please enter a guess over 1000.")
+                guess = self._console.read_number(prompt)
+            elif(guess > 9999):
+                print("Please enter a guess under 9999.")
+                guess = self._console.read_number(prompt)
+            else:
+                break
         move = Move(guess)
         player.set_move(move)
 

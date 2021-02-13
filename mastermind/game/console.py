@@ -34,14 +34,7 @@ class Console:
         while True:
             if guess.isnumeric():
                 guess = int(guess)
-                if(guess < 1000):
-                    print("Please enter a guess over 1000.")
-                    guess = input(prompt)
-                elif(guess > 9999):
-                    print("Please enter a guess under 9999.")
-                    guess = input(prompt)
-                else:
-                    break
+                break
             else:
                 print("Please enter a positive number.")
                 guess = input(prompt)
@@ -61,5 +54,15 @@ class Console:
 # x = Console()
 # name = x.read("What is your name? ")
 # x.write(name)
-# guess = x.read_number("What is your guess? ")
-# x.write(guess)
+# prompt = "Please enter your guess (1000-9999): "
+# guess = x.read_number(prompt)
+# while True:
+#     if(guess < 1000):
+#         print("Please enter a guess over 1000.")
+#         guess = x.read_number(prompt)
+#     elif(guess > 9999):
+#         print("Please enter a guess under 9999.")
+#         guess = x.read_number(prompt)
+#     else:
+#         break
+# print(guess)
