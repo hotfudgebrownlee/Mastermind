@@ -3,7 +3,7 @@ class Player:
     Stereotype: 
         Information Holder
     """
-    def __init__(self, name):
+    def __init__(self, name, code):
         """The class constructor.
         
         Args:
@@ -11,6 +11,7 @@ class Player:
         """
         self._name = name
         self._move = None
+        self._code = code
 
     def get_name(self):
         """
@@ -40,5 +41,14 @@ class Player:
             move (Move): an instance of Move
         """
         self._move = move
+
+    def get_code(self):
+        """
+        Returns the player's secret code.
+
+        Args:
+            self (Player): an instance of Player.
+        """
+        return self._code
 
     

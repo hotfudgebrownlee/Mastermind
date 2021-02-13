@@ -27,7 +27,6 @@ class Director:
         self._board = Board()
         self._console = Console()
         self._keep_playing = True
-        self._move = None
         self._roster = Roster()
 
     def start_game(self):
@@ -62,7 +61,8 @@ class Director:
                 break
         for i in range(num_players):
             p_name = self._console.read(f'Player {(i+1)}, please enter your name: ')
-            player = Player(p_name)
+            p_code = self._board.get_code()
+            player = Player(p_name,p_code)
             self._roster.add_player(player)
 
     def _get_inputs(self):
@@ -97,6 +97,7 @@ class Director:
         """
         player = self._roster.get_current()
         move = player.get_move()
+        code = player.get_code()
         self._board.apply(move)
 
     def _do_outputs(self):

@@ -8,7 +8,7 @@ class Move:
         Args:
             self (Move): an instance of Move.
         """
-        self._guess = guess 
+        self._guess = guess
     def get_guess(self):
         """Returns the move that is either correct or not.
         Args:
