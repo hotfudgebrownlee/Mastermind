@@ -53,10 +53,10 @@ class Director:
         self.num_players = self._console.read_number(prompt)
         while True:
             if(self.num_players > 6):
-                print("Please choose less than 7 players.")
+                self._console.write("Please choose less than 7 players.")
                 self.num_players = self._console.read_number(prompt)
             elif(self.num_players < 2):
-                print("Please choose more than 1 player.")
+                self._console.write("Please choose more than 1 player.")
                 self.num_players = self._console.read_number(prompt)
             else:
                 break
@@ -79,10 +79,10 @@ class Director:
         guess = self._console.read_number(prompt)
         while True:
             if(guess < 1000):
-                print("Please enter a guess over 1000.")
+                self._console.write("Please enter a guess over 1000.")
                 guess = self._console.read_number(prompt)
             elif(guess > 9999):
-                print("Please enter a guess under 9999.")
+                self._console.write("Please enter a guess under 9999.")
                 guess = self._console.read_number(prompt)
             else:
                 break
@@ -113,7 +113,7 @@ class Director:
         if self._board.matches_code():
             winner = self._roster.get_current()
             name = winner.get_name()
-            print(f'\n{name} won!')
+            self._console.write(f'\n{name} won!')
             self._keep_playing = False
         print()
         for _ in range(self.num_players):
