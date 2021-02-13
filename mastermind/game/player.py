@@ -10,9 +10,29 @@ class Player:
             self (Player): an instance of Player.
         """
         self._name = name
-        self._move = None
+        self._move = '----'
         self._code = code
+        self._hint = '****'
 
+    def set_hint(self, hint):
+        """
+        Sets the player's last hint to the hint the board returns.
+
+        Args:
+            self (Player): an instance of Player.
+            hint (string): hint returned by the board.
+        """
+        self._hint = hint
+
+    def get_hint(self):
+        """
+        Returns the player's hint.
+
+        Args:
+            self (Player): an instance of Player.
+        """
+        return self._hint
+    
     def get_name(self):
         """
         Returns the player's name.

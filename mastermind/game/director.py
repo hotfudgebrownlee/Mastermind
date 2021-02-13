@@ -28,6 +28,7 @@ class Director:
         self._console = Console()
         self._keep_playing = True
         self._roster = Roster()
+        self.num_players = 0
 
     def start_game(self):
         """Starts the game loop to control sequence of play.
@@ -49,17 +50,17 @@ class Director:
             self (Director): An instance of Director.
         """
         prompt = "How many players? (2-6): "
-        num_players = self._console.read_number(prompt)
+        self.num_players = self._console.read_number(prompt)
         while True:
-            if(num_players > 6):
+            if(self.num_players > 6):
                 print("Please choose less than 7 players.")
-                num_players = self._console.read_number(prompt)
-            elif(num_players < 2):
+                self.num_players = self._console.read_number(prompt)
+            elif(self.num_players < 2):
                 print("Please choose more than 1 player.")
-                num_players = self._console.read_number(prompt)
+                self.num_players = self._console.read_number(prompt)
             else:
                 break
-        for i in range(num_players):
+        for i in range(self.num_players):
             p_name = self._console.read(f'Player {(i+1)}, please enter your name: ')
             p_code = self._board.get_code()
             player = Player(p_name,p_code)
@@ -86,7 +87,7 @@ class Director:
             else:
                 break
         move = Move(guess)
-        player.set_move(move)
+        player.set_move(move.get_guess())
 
     def _do_updates(self):
         """Updates important game information for each round of play. For
@@ -98,7 +99,8 @@ class Director:
         player = self._roster.get_current()
         move = player.get_move()
         code = player.get_code()
-        self._board.apply(move)
+        self._board.apply(move, code)
+        player.set_hint(self._board.get_hint())
 
     def _do_outputs(self):
         """Outputs the important game information for each round of play.
@@ -113,8 +115,12 @@ class Director:
             name = winner.get_name()
             print(f'\n{name} won!')
             self._keep_playing = False
-        move = self._roster.get_current().get_move()
-        hint = self._board.get_hint()
-        text = (f"{move}, {hint}")
-        self._console.write(text)
+        print()
+        for _ in range(self.num_players):
+            self._roster.next_player()
+            move = self._roster.get_current().get_move()
+            hint = self._roster.get_current().get_hint()
+            name = self._roster.get_current().get_name()
+            text = (f"Player {name}: {move}, {hint}")
+            self._console.write(text)
         self._roster.next_player()
