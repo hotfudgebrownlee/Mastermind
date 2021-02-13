@@ -21,7 +21,7 @@ class Console:
         return input(prompt)
 
     def read_number(self, prompt):
-        """Gets text input from the user.
+        """Gets text input from the user. Validates input.
         
         Args:
             self (Console): an instance of Console.
@@ -30,7 +30,23 @@ class Console:
         Returns:
             integer: the user's input as a number.
         """
-        return int(input(prompt))
+        guess = input(prompt)
+        while True:
+            if guess.isnumeric():
+                guess = int(guess)
+                if(guess < 1000):
+                    print("Please enter a guess over 1000.")
+                    guess = input(prompt)
+                elif(guess > 9999):
+                    print("Please enter a guess under 9999.")
+                    guess = input(prompt)
+                else:
+                    break
+            else:
+                print("Please enter a positive number.")
+                guess = input(prompt)
+        return guess
+        
 
     def write(self, text):
         """Gets text input from the user.
@@ -40,3 +56,10 @@ class Console:
             text(string): The output to be displayed.
         """
         print(text)
+
+"""TEST CASES:"""
+# x = Console()
+# name = x.read("What is your name? ")
+# x.write(name)
+# guess = x.read_number("What is your guess? ")
+# x.write(guess)
